@@ -10,7 +10,8 @@
 
 	ตัวอย่างโจทย์ที่ 1 : การทำ Vlan เบื้องต้น 2 วง
 
-![[Pasted image 20241209001952.png]]
+![image](https://github.com/user-attachments/assets/d11a13c8-477e-4035-b2a2-9fb64e70e212)
+
 
 จากรูปให้เราทำ 2 Vlan โดยเราจะไป Config ที่ Switch ก่อนนะ
 
@@ -19,7 +20,8 @@
 ```
 show vlan
 ```
-![[Pasted image 20241209002458.png]]
+![image](https://github.com/user-attachments/assets/2e651452-d5f7-4584-8004-e6a72ae6558b)
+
 
 **เรามาทำ Vlan ที่ 1 กับ 2 กัน**
 ```
@@ -45,7 +47,8 @@ exit
 
 พอผมมาลองตรวจสอบ Vlan ก็จะถูกสร้างแล้ว
 
-![[Pasted image 20241209002827.png]]
+![image](https://github.com/user-attachments/assets/de257a96-cea1-4482-8a40-5cb9e1149fc1)
+
 
 **ต่อมากำหนด Port ให้กับ VLAN**
 
@@ -69,13 +72,15 @@ switchport access vlan 20 #เลือก Vlan no.
 
 พอผมมาลองตรวจสอบ Vlan ก็จะพบว่า Port ถูกเชื่อม
 
-![[Pasted image 20241209003735.png]]
+![image](https://github.com/user-attachments/assets/3fbed9fd-625a-4c9b-ad5e-760eaf8fa77a)
+
 
 ทีนี้ Device ที่อยู่คนล่ะ Vlan ก็จะคุยกันไม่ได้แล้ว แต่ๆๆๆถ้าผมอยากให้มันคุยด้วยกันได้ล่ะ จำทำยังไงดี
 
 **ก็ใช้ Router มาช่วย**
 
-![[Pasted image 20241209005323.png]]
+![image](https://github.com/user-attachments/assets/bfce8c05-dbba-4cc7-a8ce-61f742925955)
+
 
 แบบนี้นะ
 
