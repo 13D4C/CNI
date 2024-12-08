@@ -108,3 +108,5 @@ ip address 192.168.20.1 255.255.255.0 #gateway ที่ใช้
 ```
 
 จากนั้นก็ Ping ติดกันแล้ว (อย่าลืมตั้ง Gateway ที่ Device ด้วยนะ)
+
+แต่ถ้าเป็น Switch L3 ใช้ ip routing นะจ้ะ
