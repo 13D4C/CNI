@@ -1,5 +1,34 @@
-	
-Routing On-Stick
+# Static Route
+การทำ Static Route บนอุปกรณ์ Cisco เป็นการกำหนดเส้นทางบนเราเตอร์หรือสวิตช์แบบคงที่ เพื่อให้สามารถส่งข้อมูลไปยังเครือข่ายปลายทางที่ต้องการได้
+
+![image](https://github.com/user-attachments/assets/75d44326-a2d4-4447-b81d-f663b8433192)
+
+ตัวอย่าง Topology
+
+ก็ Set IP ให้ทุกเครื่องไป เลย ส่วน Default คือขาของ Switch เชื่อมกับ Router
+
+ทำการ set IP Interface ของ Router ด้วยนะ
+
+เข้าไปในขา Interface แล้วใช้คำสั่ง
+
+```
+ip add <IPที่ต้องการจะตั้ง> <Subnet Mask>
+no shut
+```
+
+จากนั้นถ้าอยาก Route ไปที่วงที่ต้องการให้ใช้คำสั่ง
+
+```
+en
+conf t
+ip route <Network ID วงที่เราอยากจะไป> <Subnet mask> <Next Hop>
+```
+
+แค่นั้นก็จะไปหาวงนั้นได้แล้ว
+
+โอเคต่อมาจะมาทำ On-Stick กันดีกว่า	
+
+# Routing On-Stick
 
 ![image](https://github.com/user-attachments/assets/1064ed96-edd4-449b-82ae-e360e928023d)
 
