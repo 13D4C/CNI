@@ -1,7 +1,8 @@
 	
 Routing On-Stick
 
-![[Pasted image 20241222162052.png]]
+![image](https://github.com/user-attachments/assets/1064ed96-edd4-449b-82ae-e360e928023d)
+
 
 ก็ขั้นแรก เรามาทำการเตรียม Vlan กับ Port Switch กันก่อนนะ
 
