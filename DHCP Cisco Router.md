@@ -1,6 +1,8 @@
-
+# DHCP ROUTER CISCO
 
 **1. การตั้งค่า DHCP บน Router ตามรูป**
+
+![image](https://github.com/user-attachments/assets/41b2019f-215e-416b-9457-6aa5039430fc)
 
 *   **เข้าสู่โหมด config:**
     ```
