@@ -7,13 +7,30 @@ Ipv4 ![image](https://github.com/user-attachments/assets/93dce1bd-385d-451c-9d57
 สำหรับให้ Ubuntu กัน
 
  ```bash
- sudo ip addr add 172.51.216.65/29 dev ens2
+ sudo ip addr add 171.51.216.66/29 dev ens2
+sudo ip route add default via 171.51.216.65 dev ens2
+ ```
+
+version netplan
+ ```bash
+network:
+  version: 2
+  ethernets:
+    ens2:
+      addresses:
+        - 172.51.216.66/29
+      routes:
+        - to: default
+          via: 172.51.216.65
+      nameservers:
+        addresses:
+          - 172.51.216.65
  ```
 
 ถ้าตั้งผิดจะลบยังไงอ่ะ
 
 ```bash
-sudo ip addr del 172.51.216.66/29 dev ens2
+sudo ip addr del 171.51.216.66/29 dev ens2
  ```
 
 add IPv4 Vlan และทำ switch
@@ -59,6 +76,21 @@ network 172.51.216.96 255.255.255.224
 default-router 172.51.216.97
 dns-server 172.51.216.97
  ```
+
+ต่อมาจะมาทำ ACL กับ Nat
+```
+en
+conf t
+access-list 1 permit 172.51.216
+ขาออก
+ip nat outside
+ขาเข้า
+ipnat inside
+และ
+ip nat inside source list 1 int <ขาออก> overload
+แล้วก็ทำการ
+ip route 0.0.0.0 0.0.0.0 <next hop>
+```
 
 ต่อมา มาตั้งให้ Ubuntu 2 รับ dhcp
 ```bash
