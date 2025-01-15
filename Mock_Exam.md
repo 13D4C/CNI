@@ -45,8 +45,17 @@ ip address 10.30.6.223	255.255.255.0
 no shut
 exit
 ip default-gateway 10.30.6.1
+ip dhcp pool ITKMITL-1
+network 172.51.216.96 255.255.255.224
+default-router 172.51.216.97
+dns-server 172.51.216.97
  ```
 
+ต่อมา มาตั้งให้ Ubuntu 2 รับ dhcp
+```bash
+sudo vim /etc/netplan/50-cloud-init.yaml
+แล้วปรับให้มันเป็น dhcp: true
+ ```
 IPv6 ![image](https://github.com/user-attachments/assets/e78a762a-8dff-48e8-a7d7-c62eafea1cb0)
 
 
