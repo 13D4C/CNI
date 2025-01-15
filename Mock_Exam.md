@@ -1,6 +1,8 @@
 ![image](https://github.com/user-attachments/assets/0376cf79-3628-4a90-aebf-dc6fcb24b7aa)
 
-Ipv4 ![image](https://github.com/user-attachments/assets/f214e116-ba85-4d8a-bb39-9a58cf0ffa7d)
+Ipv4 ![image](https://github.com/user-attachments/assets/93dce1bd-385d-451c-9d57-7a01e7070cf4)
 
-IPv6 ![image](https://github.com/user-attachments/assets/0368f1ba-1c00-4371-b199-583d3ee62b63)
+
+IPv6 ![image](https://github.com/user-attachments/assets/e78a762a-8dff-48e8-a7d7-c62eafea1cb0)
+
 
