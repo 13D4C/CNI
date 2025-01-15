@@ -7,13 +7,13 @@ Ipv4 ![image](https://github.com/user-attachments/assets/93dce1bd-385d-451c-9d57
 สำหรับให้ Ubuntu กัน
 
  ```bash
- sudo ip addr add 171.51.216.65/29 dev ens2
+ sudo ip addr add 172.51.216.65/29 dev ens2
  ```
 
 ถ้าตั้งผิดจะลบยังไงอ่ะ
 
 ```bash
-sudo ip addr del 171.51.216.66/29 dev ens2
+sudo ip addr del 172.51.216.66/29 dev ens2
  ```
 
 add IPv4 Vlan และทำ switch
