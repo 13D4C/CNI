@@ -55,6 +55,7 @@ dns-server 172.51.216.97
 ```bash
 sudo vim /etc/netplan/50-cloud-init.yaml
 แล้วปรับให้มันเป็น dhcp: true
+sudo netplan apply
  ```
 IPv6 ![image](https://github.com/user-attachments/assets/e78a762a-8dff-48e8-a7d7-c62eafea1cb0)
 
