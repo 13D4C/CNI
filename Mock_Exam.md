@@ -91,6 +91,12 @@ ip nat inside source list 1 int <ขาออก> overload
 แล้วก็ทำการ
 ip route 0.0.0.0 0.0.0.0 <next hop>
 ```
+ต่อไปทำ Route
+
+```
+ip route 10.30.6.0 255.255.255.0 10.30.6.1
+ipv6 route 2001:db8:bacd::/64 2001:db8:dada:aaaa::1000
+```
 
 ต่อมา มาตั้งให้ Ubuntu 2 รับ dhcp
 ```bash
@@ -122,6 +128,27 @@ sudo vim /etc/netplan/50-cloud-init.yaml
           - fe80::1
           - 1.1.1.1
 
+ส่วน ubuntu 2 set แบบนี้นะ
+sudo vim /etc/netplan/50-cloud-init.yaml
+
+network:
+  version: 2
+  ethernets:
+    ens2:
+      dhcp4: true
+      dhcp6: true
+      ipv6-address-generation: eui64
  ```
 
+ต่อมาตั้ง router
+
+ไปทีล่ะ interfaceแล้ว add Ip
+
+ ```
+ipv6 address <ipv6>/64
+จากนั้นก็
+ipv6 address <link local> link-local
+แล้วก็
+Unicast-routing
+ ```
 
