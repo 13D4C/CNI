@@ -100,4 +100,28 @@ sudo netplan apply
  ```
 IPv6 ![image](https://github.com/user-attachments/assets/e78a762a-8dff-48e8-a7d7-c62eafea1cb0)
 
+ตั้ง Ipv6
+```bash
+sudo vim /etc/netplan/50-cloud-init.yaml
+
+  version: 2
+  ethernets:
+    ens2:
+      addresses:
+        - 172.51.216.66/29
+        - 2001:51:216:2244::2/64
+        - fe80::2/10
+      routes:
+        - to: default
+          via: 172.51.216.65
+        - to: "::/0"
+          via: fe80::1
+      nameservers:
+        addresses:
+          - 172.51.216.65
+          - fe80::1
+          - 1.1.1.1
+
+ ```
+
 
