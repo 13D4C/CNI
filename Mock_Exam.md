@@ -152,3 +152,10 @@ ipv6 address <link local> link-local
 Unicast-routing
  ```
 
+ต่อมาทำ ssh ให้ Device กัน
+
+
+
+
+Part ACL
+
