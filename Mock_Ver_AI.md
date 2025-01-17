@@ -110,6 +110,7 @@ Ipv4 ![image](https://github.com/user-attachments/assets/93dce1bd-385d-451c-9d57
       network 172.51.216.96 255.255.255.224 # กำหนด network range
       default-router 172.51.216.97    # กำหนด default router
       dns-server 172.51.216.97        # กำหนด DNS server
+      ip dhcp excluded-address 172.51.216.96 172.51.216.100
     ```
 
 **การตั้งค่า ACL และ NAT**
