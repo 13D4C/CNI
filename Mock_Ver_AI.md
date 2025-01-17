@@ -147,6 +147,7 @@ Ipv4 ![image](https://github.com/user-attachments/assets/93dce1bd-385d-451c-9d57
 
 ```bash
 ip route 10.30.6.0 255.255.255.0 10.30.6.1      # กำหนด static route สำหรับเครือข่าย 10.30.6.0/24
+ip route 172.17.0.0 255.255.0.0 10.30.6.1
 ipv6 route 2001:db8:bacd::/64 2001:db8:dada:aaaa::1000 # กำหนด static route สำหรับ IPv6
 ```
 
