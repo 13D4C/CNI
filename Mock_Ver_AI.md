@@ -15,7 +15,7 @@ Ipv4 ![image](https://github.com/user-attachments/assets/93dce1bd-385d-451c-9d57
     *   `ens2`: ชื่อ interface ของเครือข่าย
     *   `171.51.216.65`: IP address ของ default gateway
 
-2.  **การกำหนดค่า IPv4 บน Ubuntu (วิธีที่ 2 - Netplan)**
+2.  **การกำหนดค่า IPv4 บน Ubuntu (วิธีที่ 2 - Netplan ควรใช้วิธีนี้เพราะมันจะถาวร)**
 
     ```yaml
     network:
@@ -33,6 +33,10 @@ Ipv4 ![image](https://github.com/user-attachments/assets/93dce1bd-385d-451c-9d57
     ```
     *   Netplan เป็นเครื่องมือสำหรับการจัดการเครือข่ายใน Ubuntu
     *   ไฟล์นี้จะถูกบันทึกใน `/etc/netplan/`
+    *   ****NOTE****
+    *   1.) sudo nano /etc/netplan/[file .yaml]
+    *   2.) configure ตามภาพ
+    *   3.) หลัง configure ให้ sudo netplan apply เพื่อให้เอาที่ configure มาปรับใช้ 
 
 3.  **การลบ IP address ที่กำหนดไว้ (กรณีตั้งค่าผิดพลาด)**
 
@@ -58,6 +62,7 @@ Ipv4 ![image](https://github.com/user-attachments/assets/93dce1bd-385d-451c-9d57
 
     ```bash
     interface <ชื่อ Interface>
+      no shutdown
       switchport mode access            # ตั้งค่า interface เป็น access port
       switchport access vlan <ID>      # กำหนด VLAN ที่ interface จะเข้าถึง
     interface <ชื่อ Interface ที่เชื่อมต่อกับ Router>
@@ -77,7 +82,7 @@ Ipv4 ![image](https://github.com/user-attachments/assets/93dce1bd-385d-451c-9d57
 
     interface e0/0.2244              # สร้าง sub-interface สำหรับ VLAN 2244
       encapsulation dot1Q 2244       # กำหนด encapsulation เป็น dot1Q และ VLAN ID
-      ip address 171.51.216.66 255.255.255.248 # กำหนด IP address
+      ip address 172.51.216.66 255.255.255.248 # กำหนด IP address
       no shut                       # เปิดใช้งาน interface
       exit
 
@@ -125,6 +130,7 @@ Ipv4 ![image](https://github.com/user-attachments/assets/93dce1bd-385d-451c-9d57
     interface <ขาเข้า>
     ip nat inside
     # ทำ NAT โดยใช้ access-list และ overload (PAT)
+    ทำที่ global config
     ip nat inside source list 1 int <ขาออก> overload
     ```
     *   `overload`: ใช้ Port Address Translation (PAT) เพื่อแปลง private IP เป็น public IP
