@@ -68,6 +68,7 @@ Ipv4 ![image](https://github.com/user-attachments/assets/93dce1bd-385d-451c-9d57
     interface <ชื่อ Interface ที่เชื่อมต่อกับ Router>
       switchport mode trunk             # ตั้งค่า interface เป็น trunk port
       switchport trunk encapsulation dot1Q  # กำหนด encapsulation เป็น dot1Q
+    no ip routing
     ```
     *   `access port`: อนุญาตเฉพาะ traffic จาก VLAN เดียว
     *   `trunk port`: อนุญาต traffic จากหลาย VLAN
@@ -187,7 +188,6 @@ IPv6 ![image](https://github.com/user-attachments/assets/e78a762a-8dff-48e8-a7d7
             addresses:
               - 172.51.216.65        # IPv4 nameserver
               - fe80::1            # IPv6 nameserver (link-local address)
-              - 1.1.1.1               # Public DNS server
     ```
 2.  **การกำหนดค่า IPv6 DHCP บน Ubuntu 2 (Netplan)**
 
