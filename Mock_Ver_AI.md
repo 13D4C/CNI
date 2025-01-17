@@ -204,3 +204,87 @@ IPv6 ![image](https://github.com/user-attachments/assets/e78a762a-8dff-48e8-a7d7
     # เปิด IPv6 Unicast routing
     ipv6 unicast-routing
     ```
+
+
+Part : ACL
+
+### 1. ห้ามให้ ubuntu-1 telnet ใส่ Switch แต่อุปกรณ์อื่นสามารถ telnet มา switch ได้ ด้วย IPv4
+
+*   **สร้าง Access List:**
+
+    ```
+    Switch(config)# access-list 101 deny tcp host <ubuntu-1 IPv4> host <Switch IPv4> eq 23
+    Switch(config)# access-list 101 permit tcp any host <Switch IPv4> eq 23
+    ```
+    *   `access-list 101` : สร้าง Standard Access List หมายเลข 101 (สามารถใช้หมายเลขอื่นได้)
+    *   `deny tcp host <ubuntu-1 IPv4> host <Switch IPv4> eq 23` : ไม่อนุญาต (deny) การเชื่อมต่อ TCP จาก IP ของ ubuntu-1 ไปยัง IP ของ Switch ที่พอร์ต 23 (Telnet)
+    *   `permit tcp any host <Switch IPv4> eq 23`: อนุญาต (permit) การเชื่อมต่อ TCP จาก IP อื่นๆ ไปยัง IP ของ Switch ที่พอร์ต 23 (Telnet)
+*   **นำ Access List ไปใช้กับ vty lines:**
+
+    ```
+    Switch(config)# line vty 0 15
+    Switch(config-line)# access-class 101 in
+    ```
+    *   `line vty 0 15` : เข้าสู่การตั้งค่า vty lines (ใช้สำหรับ Telnet/SSH)
+    *   `access-class 101 in` : นำ Access List หมายเลข 101 มาใช้กับ inbound traffic
+
+### 2. ห้ามให้ ubuntu-1 ping IPv4 มาหา ubuntu-0 ได้ แต่ ubuntu-0 สามารถ ping IPv4 มาหา ubuntu-1 ได้
+
+*   **สร้าง Access List บน Router:**
+
+    ```
+    Router(config)# access-list 102 deny icmp host <ubuntu-1 IPv4> host <ubuntu-0 IPv4>
+    Router(config)# access-list 102 permit icmp any any
+    ```
+    *   `access-list 102` : สร้าง Standard Access List หมายเลข 102
+    *   `deny icmp host <ubuntu-1 IPv4> host <ubuntu-0 IPv4>` : ไม่อนุญาต ICMP (ping) จาก IP ของ ubuntu-1 ไปยัง IP ของ ubuntu-0
+    *   `permit icmp any any` : อนุญาต ICMP จาก IP อื่นๆ ไปยัง IP อื่นๆ
+*   **นำ Access List ไปใช้กับ Interface E0/2 (ฝั่งที่เชื่อมต่อกับ Switch):**
+
+    ```
+    Router(config)# interface E0/2
+    Router(config-if)# ip access-group 102 in
+    ```
+    *   `interface E0/2` : เข้าสู่การตั้งค่า Interface E0/2
+    *   `ip access-group 102 in` : นำ Access List หมายเลข 102 มาใช้กับ inbound traffic
+
+### 3. ห้าม ubuntu-0 ping IPv6 ไปที่ Router ได้แต่สามารถ Ping ไปหาอุปกรณ์อื่นได้หมด
+
+*   **สร้าง IPv6 Access List บน Router:**
+
+    ```
+    Router(config)# ipv6 access-list BLOCK-UBUNTU0-PING
+    Router(config-ipv6-acl)# deny icmp host <ubuntu-0 IPv6> host <Router IPv6>
+    Router(config-ipv6-acl)# permit icmp any any
+    ```
+    *   `ipv6 access-list BLOCK-UBUNTU0-PING` : สร้าง IPv6 Access List ชื่อ BLOCK-UBUNTU0-PING
+    *   `deny icmp host <ubuntu-0 IPv6> host <Router IPv6>` : ไม่อนุญาต ICMP จาก IPv6 ของ ubuntu-0 ไปยัง IPv6 ของ Router
+    *   `permit icmp any any` : อนุญาต ICMP จาก IPv6 อื่นๆ ไปยัง IPv6 อื่นๆ
+*   **นำ Access List ไปใช้กับ Interface E0/2 (ฝั่งที่เชื่อมต่อกับ Switch):**
+
+    ```
+    Router(config)# interface E0/2
+    Router(config-if)# ipv6 traffic-filter BLOCK-UBUNTU0-PING in
+    ```
+    *   `interface E0/2` : เข้าสู่การตั้งค่า Interface E0/2
+    *   `ipv6 traffic-filter BLOCK-UBUNTU0-PING in` : นำ IPv6 Access List ชื่อ BLOCK-UBUNTU0-PING มาใช้กับ inbound traffic
+
+### 4. Block IPv4 ของ Hacker ที่อยู่ใน Subnet เดียวกับ Web Server (172.17.1.100/16) ด้วย ACL ที่ Router
+
+*   **สร้าง Access List บน Router:**
+
+    ```
+    Router(config)# access-list 103 deny ip 172.17.0.0 0.0.255.255 host <ubuntu-0 IPv4>
+    Router(config)# access-list 103 permit ip any any
+    ```
+    *   `access-list 103` : สร้าง Standard Access List หมายเลข 103
+    *   `deny ip 172.17.0.0 0.0.255.255 host <ubuntu-0 IPv4>` : ไม่อนุญาต IP จาก Subnet 172.17.0.0/16 (Wildcard Mask 0.0.255.255) ไปยัง IP ของ ubuntu-0
+    *   `permit ip any any` : อนุญาต IP อื่นๆ ไปยัง IP อื่นๆ
+*   **นำ Access List ไปใช้กับ Interface E0/1 (ฝั่งที่เชื่อมต่อกับ Internet):**
+
+    ```
+    Router(config)# interface E0/1
+    Router(config-if)# ip access-group 103 in
+    ```
+    *   `interface E0/1` : เข้าสู่การตั้งค่า Interface E0/1
+    *   `ip access-group 103 in` : นำ Access List หมายเลข 103 มาใช้กับ inbound traffic
