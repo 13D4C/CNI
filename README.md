@@ -5,3 +5,6 @@
 
 ส่วนนี้ของไทค์
 https://dramatic-stilton-4ee.notion.site/CNI-174b83b1d81d8041936fd28d6f733d8a
+
+
+23/1/2025 Mock บึ้มนะ กำลังหาทางแก้อยู่
